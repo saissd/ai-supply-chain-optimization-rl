@@ -1,67 +1,61 @@
-name: CI/CD Pipeline for AI Model
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main  # ✅ Run CI/CD on every push to 'main'
+      - main
   pull_request:
     branches:
-      - main  # ✅ Run CI/CD on every PR
+      - main
 
 jobs:
-  # ✅ Continuous Integration: Lint & Test
-  ci:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt
+        run: make install
 
-      - name: Run Linting (Check Code Style)
-        run: |
-          pip install flake8
-          flake8 --max-line-length=88 train.py test.py deploy.py
+      - name: Run Linter
+        run: make lint
 
-      - name: Run Unit Tests
-        run: |
-          pytest test.py  # ✅ Run test cases
+      - name: Format Code
+        run: make format
 
-  # ✅ Continuous Deployment: Train & Deploy Model
-  cd:
-    needs: ci
+      - name: Run Tests
+        run: make test
+
+      - name: Lint Dockerfile (if applicable)
+        run: make container-lint || echo "Skipping Dockerfile lint"
+
+  deploy:
+    needs: build-and-test  # Run deployment only if CI succeeds
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt
+        run: make install
 
-      - name: Train AI Model
+      - name: Deploy Application (Example: Docker & AWS)
         run: |
-          python train.py  # ✅ Train RL Model
+          echo "Starting Deployment..."
+          make deploy  # Replace this with actual deployment commands
 
-      - name: Upload Model to AWS S3 (Optional)
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 cp models/supply_chain_dqn.zip s3://your-bucket-name/
-
-      - name: Deploy Model
-        run: |
-          python deploy.py  # ✅ Deploy trained model to cloud API
+      - name: Notify Success
+        run: echo "🚀 Deployment Successful!"

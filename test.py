@@ -13,7 +13,7 @@ model = DQN.load("models/supply_chain_dqn.zip", env=vec_env)
 model.observation_space = vec_env.observation_space
 model.action_space = vec_env.action_space
 
-# ✅ Test Function
+
 def test_model():
     """Function to test the trained model."""
     obs, _ = vec_env.reset()

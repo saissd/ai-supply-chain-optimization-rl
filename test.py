@@ -2,7 +2,7 @@ from stable_baselines3 import DQN
 from environment.supply_chain_env import SupplyChainEnv
 import numpy as np
 
-
+env = SupplyChainEnv()
 try:
     model = DQN.load("models/supply_chain_dqn", env=env)
 except KeyError as e:
@@ -12,7 +12,7 @@ except KeyError as e:
 
 def test_model():
     """Function to test the trained model."""
-    env = SupplyChainEnv()
+    
     obs = env.reset()
 
     for _ in range(20):  # Run 20 test steps

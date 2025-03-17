@@ -4,14 +4,15 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -36,23 +37,22 @@ jobs:
       - name: Lint Dockerfile (if applicable)
         run: make container-lint || echo "Skipping Dockerfile lint"
 
+      - name: Run All Steps
+        run: make all
+
   deploy:
-    needs: build-and-test  # Run deployment only if CI succeeds
+    needs: build-and-test
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+      - name: Set up Deployment Environment
+        run: echo "Setting up deployment environment..."
 
-      - name: Install Dependencies
-        run: make install
-
-      - name: Deploy Application (Example: Docker & AWS)
+      - name: Deploy Application
         run: |
           echo "Starting Deployment..."
           make deploy  # Replace this with actual deployment commands

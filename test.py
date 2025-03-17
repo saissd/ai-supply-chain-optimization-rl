@@ -1,7 +1,5 @@
 from stable_baselines3 import DQN
-import gymnasium as gym  # ✅ Fix for NameError
-import numpy as np
-from gymnasium import spaces
+
 from environment.supply_chain_env import SupplyChainEnv
 
 # Load trained model

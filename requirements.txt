@@ -1,6 +1,6 @@
 gymnasium==0.29.1
 numpy==1.23.5
-stable-baselines3==1.6.2
+stable-baselines3==2.1.0  # ✅ Upgraded to latest version
 torch==1.13.1
 flask==2.2.3
 pytest==7.2.0

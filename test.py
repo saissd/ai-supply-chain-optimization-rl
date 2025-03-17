@@ -2,6 +2,7 @@ from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 from environment.supply_chain_env import SupplyChainEnv
+import numpy as np
 
 
 # ✅ Create Environment and Wrap it Properly

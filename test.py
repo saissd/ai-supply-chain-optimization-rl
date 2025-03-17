@@ -1,11 +1,10 @@
 from stable_baselines3 import DQN
-from environment.supply_chain_env import SupplyChainEnv
+from train import env
 import numpy as np
 
 
 def test_model():
     """Function to test the trained model."""
-    env = SupplyChainEnv()
     model = DQN.load("models/supply_chain_dqn", env=env)
     obs = env.reset()
 

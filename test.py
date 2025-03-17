@@ -3,7 +3,7 @@ from environment.supply_chain_env import SupplyChainEnv
 
 
 # ✅ Load Model with Environment
-model = DQN.load("models/supply_chain_dqn", env=vec_env)
+model = DQN.load("models/supply_chain_dqn")
 
 
 def test_model():

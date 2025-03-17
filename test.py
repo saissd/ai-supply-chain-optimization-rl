@@ -4,8 +4,6 @@ import numpy as np
 from train import env
 
 
-
-# ✅ Load Model with Environment
 try:
     model = DQN.load("models/supply_chain_dqn", env=env)
 except KeyError as e:

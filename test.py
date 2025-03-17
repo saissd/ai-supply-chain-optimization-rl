@@ -3,7 +3,6 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 from environment.supply_chain_env import SupplyChainEnv
 import numpy as np
-from train import env
 from trin import vec_env
 
 
@@ -32,4 +31,4 @@ def test_model():
 
 
 if __name__ == "__main__":
-    test_model()
+    test_model(vec_env)

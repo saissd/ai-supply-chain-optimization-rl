@@ -9,7 +9,7 @@ env = SupplyChainEnv()
 vec_env = DummyVecEnv([lambda: Monitor(env)])
 
 # ✅ Load Model with Environment
-model = DQN.load("models/supply_chain_dqn", env=vec_env)
+model = DQN.load("models/supply_chain_dqn.zip", env=vec_env)
 
 
 def test_model():

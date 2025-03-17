@@ -12,7 +12,6 @@ except KeyError as e:
 
 def test_model():
     """Function to test the trained model."""
-    
     obs = env.reset()
 
     for _ in range(20):  # Run 20 test steps

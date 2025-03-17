@@ -1,5 +1,6 @@
 from stable_baselines3 import DQN
 from environment.supply_chain_env import SupplyChainEnv
+import gymnasium as gym 
 
 # Load trained model
 model = DQN.load("models/supply_chain_dqn")

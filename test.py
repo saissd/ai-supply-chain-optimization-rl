@@ -1,9 +1,8 @@
-import gymnasium as gym
-import numpy as np
 from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 from environment.supply_chain_env import SupplyChainEnv
+import numpy as np
 
 # ✅ Create Environment Before Loading Model
 env = SupplyChainEnv()
@@ -12,8 +11,9 @@ vec_env = DummyVecEnv([lambda: Monitor(env)])
 # ✅ Load Model with Environment
 model = DQN.load("models/supply_chain_dqn", env=vec_env)
 
-# ✅ Define test function
+
 def test_model():
+    """Function to test the trained model."""
     obs, _ = vec_env.reset()
 
     for _ in range(10):  # Run 10 test steps
@@ -28,6 +28,7 @@ def test_model():
             obs, _ = vec_env.reset()
 
     print("✅ Model successfully tested!")
+
 
 if __name__ == "__main__":
     test_model()

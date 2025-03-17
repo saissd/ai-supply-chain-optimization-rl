@@ -1,18 +1,15 @@
-import gym
-import numpy as np
 from stable_baselines3 import DQN
-from stable_baselines3.common.env_util import make_vec_env
-from environment.supply_chain_env import SupplyChainEnv  # Import custom environment
+from environment.supply_chain_env import SupplyChainEnv
+from stable_baselines3.common.vec_env import DummyVecEnv
+from stable_baselines3.common.monitor import Monitor
 
-# ✅ Create Environment & Wrap it Properly (Fixed Wrapping Issue)
+# Create Environment
 env = SupplyChainEnv()
-vec_env = DummyVecEnv([lambda: Monitor(env, filename=None)])  # ✅ Prevent logging errors
+vec_env = DummyVecEnv([lambda: Monitor(env, filename=None)])
 
-# ✅ Train DQN Model
+# Train DQN Model
 model = DQN("MlpPolicy", vec_env, verbose=1, learning_rate=0.001, batch_size=32)
 model.learn(total_timesteps=5000)
 
-# ✅ Save the trained model
-model.save("supply_chain_dqn")
-
-print("✅ Training complete! Model saved.")
+# Save the trained model
+model.save("models/supply_chain_dqn")

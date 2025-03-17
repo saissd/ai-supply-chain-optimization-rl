@@ -1,3 +1,7 @@
+
+import gymnasium as gym  # ✅ Ensure gymnasium is imported properly
+from gymnasium import spaces
+import numpy as np
 # ✅ Custom Supply Chain Environment (Fixed Inheritance)
 class SupplyChainEnv(gym.Env):  # ✅ Explicitly inherit from gym.Env
     def __init__(self):

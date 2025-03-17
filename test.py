@@ -1,7 +1,6 @@
 from stable_baselines3 import DQN
 from environment.supply_chain_env import SupplyChainEnv
 import numpy as np
-from train import env
 
 
 try:
@@ -13,6 +12,7 @@ except KeyError as e:
 
 def test_model():
     """Function to test the trained model."""
+    env = SupplyChainEnv()
     obs = env.reset()
 
     for _ in range(20):  # Run 20 test steps

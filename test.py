@@ -1,11 +1,9 @@
 from stable_baselines3 import DQN
 from environment.supply_chain_env import SupplyChainEnv
-import numpy as np
+
 
 # ✅ Load Model with Environment
 model = DQN.load("models/supply_chain_dqn", env=vec_env)
-model.observation_space = vec_env.observation_space
-model.action_space = vec_env.action_space
 
 
 def test_model():

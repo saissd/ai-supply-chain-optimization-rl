@@ -3,10 +3,9 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 from environment.supply_chain_env import SupplyChainEnv
 import numpy as np
+from train import env
+from trin import vec_env
 
-# ✅ Create Environment Before Loading Model
-env = SupplyChainEnv()
-vec_env = DummyVecEnv([lambda: Monitor(env)])
 
 # ✅ Load Model with Environment
 model = DQN.load("models/supply_chain_dqn", env=vec_env)
